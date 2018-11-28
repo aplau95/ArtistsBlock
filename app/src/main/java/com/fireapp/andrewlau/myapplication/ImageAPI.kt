@@ -11,14 +11,6 @@ import javax.net.ssl.HttpsURLConnection
 
 
 class GetImageAsyncTask(private val callback : (newWord : String) -> Unit) : AsyncTask<String, String, String>() {
-    var client = OkHttpClient()
-    var category: String? = null
-
-    fun changeCategory(category : String) {
-        this.category = category
-    }
-
-
     override fun doInBackground(vararg params: String): String {
 
 

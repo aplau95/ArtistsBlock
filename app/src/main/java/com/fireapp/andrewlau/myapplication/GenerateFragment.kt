@@ -1,6 +1,7 @@
 package com.fireapp.andrewlau.myapplication
 
 
+import android.content.ClipDescription
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -12,6 +13,7 @@ import android.widget.Button
 import kotlinx.android.synthetic.main.fragment_generate.*
 import android.content.Intent
 import com.squareup.picasso.Picasso
+import java.util.Random
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -19,12 +21,8 @@ import com.squareup.picasso.Picasso
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- *
- */
-class GenerateFragment : Fragment() {
 
+class GenerateFragment : Fragment() {
     var category = "Art"
     private val CAMERA_PIC_REQUEST = 1337
 
@@ -38,53 +36,41 @@ class GenerateFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         wordDisplay.text = currentWord.WORD
+        definitionText.text = currentWord.DEFINITION
         if (currentWord.IMAGEURL != ""){
-            Picasso.get().load(currentWord.IMAGEURL).into(wordImage)
+            println("!!!!!!!!!!!!!!!!!!!!!!")
+            Picasso.get()
+                .load(currentWord.IMAGEURL)
+                .fit()
+                .into(wordImage)
         }
-        val getWord = getView()!!.findViewById(R.id.getWordButton) as Button
+        val getImage = getView()!!.findViewById(R.id.getWordButton) as Button
         val camButton = getView()!!.findViewById(R.id.cameraButton) as FloatingActionButton
 
-        getWord.setOnClickListener {
-            val jsonUrlString = wordlist()
+        getImage.setOnClickListener {
+
 
             GetOxfordAsyncTask(::updateWord).execute(jsonUrlString)
         }
-        camButton.setOnClickListener {
-            val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST)
-        }
+
+//        camButton.setOnClickListener {
+//            val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+//            startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST)
+//        }
     }
 
-    private fun updateImage(imageURL : String) {
-        Picasso.get().load(imageURL).into(wordImage)
+    private fun updateImage(imageURL : String, description: String) {
+        Picasso.get().load(imageURL)
+            .fit()
+            .into(wordImage)
+        currentImage.IMAGEURL = imageURL
     }
 
-    private fun updateDefinition(definition : String) {
-        println(definition)
-    }
 
     private fun updateWord(newWord : String) {
-        wordDisplay.text = newWord
-        GetImageAsyncTask(::updateImage).execute(imageLink(newWord))
-//        GetDefinitionAsyncTask(::updateDefinition).execute(defLink(newWord))
+        val unsplashApiLink = "https://api.unsplash.com/photos/random?client_id=bc37901814227d25f99ac03155e0e111c458e496b2d2bd6a14dab630e5568247"
+        GetImageAsyncTask(::updateImage).execute(unsplashApiLink)
 
-    }
-
-    private fun imageLink(wordLookup : String) : String {
-        val parsableString = wordLookup.replace(" ", "+")
-        return "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/Search/ImageSearchAPI?count=1&q=$parsableString&autoCorrect=false"
-    }
-
-    private fun wordlist(): String {
-        val language = "en"
-        val filters = "registers=Rare;domains=Art"
-        return "https://od-api.oxforddictionaries.com:443/api/v1/wordlist/$language/$filters?limit=1"
-    }
-
-    private fun defLink(word : String): String {
-        val language = "en"
-        val parsableString = word.replace(" ", "_")
-        return "https://od-api.oxforddictionaries.com:443/api/v1/wordlist/$language/$word"
     }
 
 

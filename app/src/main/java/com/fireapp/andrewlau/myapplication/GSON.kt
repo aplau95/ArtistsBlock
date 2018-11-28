@@ -19,6 +19,9 @@ data class CompleteJson(val metadata : Metadata, val results : List<Word>) {
         currentWord.WORD = results[0].word!!
         return currentWord.WORD
     }
+    fun getSize(): Int {
+        return metadata.total!!
+    }
 }
 
 data class Value (
@@ -37,9 +40,9 @@ data class ImageJson(val _type : String, val value : List<Value>) {
     }
 }
 
-data class DefinitionJson(val metadata : Metadata, val defResults : DefinitionResults) {
+data class DefinitionJson(val metadata : Metadata, val results : List<Results>) {
     fun generateDefinition(): String {
-        return defResults.lexicalEntries!![0].entries!![0].senses!![0].definitions!![0]
+        return results!![0].lexicalEntries!![0].entries!![0].senses!![0].definitions!![0]
     }
 }
 
@@ -66,7 +69,7 @@ data class VariantForm (
 
 data class Entry (
     val etymologies: List<String>? = null,
-    val grammaticalFeatures: GrammaticalFeatures? = null,
+    val grammaticalFeatures: List<GrammaticalFeatures>? = null,
     val homographNumber: Int? = null,
     val senses: List<Sense>? = null,
     val variantForms: List<VariantForm>? = null
@@ -79,7 +82,7 @@ data class LexicalEntry (
     val text : String? = ""
 )
 
-data class DefinitionResults (
+data class Results (
     val id : String? = "",
     val language : String? = "",
     val lexicalEntries : List<LexicalEntry>? = null,
@@ -87,10 +90,9 @@ data class DefinitionResults (
     val word : String? = ""
 )
 
-object currentWord {
-    var WORD: String = ""
+object currentImage {
     var IMAGEURL : String = ""
-    var DEFINITION : String = ""
+    var DESCRIPTION : String = ""
 }
 
 

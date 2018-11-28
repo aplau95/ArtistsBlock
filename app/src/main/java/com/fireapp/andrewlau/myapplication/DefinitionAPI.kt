@@ -35,7 +35,6 @@ class GetDefinitionAsyncTask(private val callback : (newWord : String) -> Unit) 
             val inString = urlConnection.inputStream.bufferedReader().readText()
             var wordData = Gson().fromJson(inString, DefinitionJson::class.java)
             definition = wordData.generateDefinition()
-            println(definition)
             publishProgress(inString)
 
         } catch (e: Exception) {
@@ -60,7 +59,6 @@ class GetDefinitionAsyncTask(private val callback : (newWord : String) -> Unit) 
         super.onPostExecute(result)
         currentWord.DEFINITION = result
         callback(result)
-        println(result)
     }
 
 
