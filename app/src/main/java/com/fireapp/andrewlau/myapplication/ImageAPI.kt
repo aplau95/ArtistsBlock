@@ -1,5 +1,6 @@
 package com.fireapp.andrewlau.myapplication
 
+import android.graphics.Bitmap
 import android.media.Image
 import android.os.AsyncTask
 import com.fireapp.andrewlau.myapplication.ImageList.imageList
@@ -12,7 +13,7 @@ import java.io.InputStreamReader
 import javax.net.ssl.HttpsURLConnection
 
 
-class GetImageAsyncTask : AsyncTask<String, String, String>() {
+class GetImageAsyncTask(private val callback : (newImageUrl : String, newBitmap : Bitmap) -> Unit) : AsyncTask<String, String, String>() {
     override fun doInBackground(vararg params: String): String {
 
         try {
@@ -24,16 +25,12 @@ class GetImageAsyncTask : AsyncTask<String, String, String>() {
                 println(imageObject.urls!!.full)
                 ImageList.imageList!!.push(imageObject)
             }
-            println("full image url: " + ImageList.imageList!!.peek().urls!!.full)
-            ImageList.currentImageObject = ImageList.imageList?.peek()
-            ImageList.currentBitMap = Utils.getBitmapFromURL(ImageList.imageList!!.peek().urls!!.full)!!
             publishProgress(inString)
 
         } catch (e: Exception) {
             e.printStackTrace()
             return e.toString()
         }
-
 
         return ""
 
