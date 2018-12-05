@@ -12,11 +12,10 @@ import java.io.InputStreamReader
 import javax.net.ssl.HttpsURLConnection
 
 
-class UpdateImageBitMapAsync : AsyncTask<String, String, String>() {
+class UpdateImage : AsyncTask<String, String, String>() {
     override fun doInBackground(vararg params: String): String {
 
         try {
-            ImageList.currentBitMap = Utils.getBitmapFromURL(params[0])!!
 
         } catch (e: Exception) {
             e.printStackTrace()

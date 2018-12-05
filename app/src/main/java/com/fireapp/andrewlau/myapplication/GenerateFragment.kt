@@ -1,36 +1,17 @@
 package com.fireapp.andrewlau.myapplication
 
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.content.ClipDescription
-import android.content.Context
 import android.os.Bundle
-import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import kotlinx.android.synthetic.main.fragment_generate.*
-import android.content.Intent
 import android.graphics.*
-import android.graphics.drawable.BitmapDrawable
 import android.support.v7.graphics.Palette
-import android.view.animation.DecelerateInterpolator
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import com.fireapp.andrewlau.myapplication.ImageList.currentBitMap
-import com.fireapp.andrewlau.myapplication.ImageList.currentImageObject
-import com.fireapp.andrewlau.myapplication.ImageList.imageList
-import com.fireapp.andrewlau.myapplication.Utils.Companion.getBitmapFromURL
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_swatch.*
-import java.net.URL
-import java.util.Random
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,9 +23,9 @@ private const val ARG_PARAM2 = "param2"
 class GenerateFragment : Fragment() {
     private val CAMERA_PIC_REQUEST = 1337
     val unsplashApiLink = "https://api.unsplash.com/photos/random?client_id=bc37901814227d25f99ac03155e0e111c458e496b2d2bd6a14dab630e5568247&count=30"
-    var currentImageUrl : String? = ""
-    var currentImageBitmap : Bitmap? = null
-    var currentImageDesc : String? = ""
+//    var currentImageUrl : String? = ""
+//    var currentImageBitmap : Bitmap? = null
+//    var currentImageDesc : String? = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,10 +38,14 @@ class GenerateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val getImage = getView()!!.findViewById(R.id.NextImage) as Button
         val imageDisplay = getView()!!.findViewById(R.id.imageDisplay) as ImageView
-        GetImageAsyncTask(updateInfo()).execute(unsplashApiLink)
+        GetImageAsyncTask(::updateInfo).execute(unsplashApiLink)
 
         getImage.setOnClickListener() {
-            getImage()
+            if (ImageList.imageList.size < 3){
+                GetImageAsyncTask(::updateInfo).execute(unsplashApiLink)
+            } else {
+                UpdateImageAsyncTask(::updateInfo).execute()
+            }
         }
 
         imageDisplay.setOnClickListener(){
@@ -89,48 +74,63 @@ class GenerateFragment : Fragment() {
     }
 
     private fun initializeDescText(imageDesc : String){
-        if (ImageList.currentImageObject!!.description.isNullOrEmpty()){
-            ImageDesc.text = "No description available"
-        } else {
-            ImageDesc.text = ImageList.currentImageObject!!.description
-        }
+        ImageDesc.text = imageDesc
     }
 
-    private fun getImage(){
-        if (ImageList.currentImageObject != null){
-            updateImage(ImageList.imageList!!.pop())
-        }
-        if (ImageList.imageList!!.size < 5) {
-            GetImageAsyncTask().execute(unsplashApiLink)
-        }
-    }
 
     private fun updateInfo(imageUrl : String, imageDesc : String, imageBitmap : Bitmap) {
         Picasso.get()
             .load(imageUrl)
             .fit()
             .into(imageDisplay)
-        initializeDescText()
-        createPalette(currentBitMap!!)
+        initializeDescText(imageDesc)
+        createPalette(imageBitmap)
     }
 
     private fun createPalette(bitmap: Bitmap) {
-
+        val numPixels = bitmap.height * bitmap.width
+        println("NUMBER OF PIXELS " + numPixels.toString())
         Palette.from(bitmap).generate { palette ->
             val defaultValue = 0x000000
-            val vibrant = palette!!.getVibrantColor(defaultValue)
-            val vibrantLight = palette.getLightVibrantColor(defaultValue)
-            val vibrantDark = palette.getDarkVibrantColor(defaultValue)
-            val muted = palette.getMutedColor(defaultValue)
-            val mutedLight = palette.getLightMutedColor(defaultValue)
-            val mutedDark = palette.getDarkMutedColor(defaultValue)
+            val c1 = palette!!.swatches[0].rgb
+            val c2 = palette!!.swatches[1].rgb
+            val c3 = palette!!.swatches[2].rgb
+            val c4 = palette!!.swatches[3].rgb
+            val c5 = palette!!.swatches[4].rgb
+            val c6 = palette!!.swatches[5].rgb
+            val c7 = palette!!.swatches[6].rgb
+            val c8 = palette!!.swatches[7].rgb
+            val c9 = palette!!.swatches[8].rgb
 
-            vibrantView.setBackgroundColor(vibrant)
-            vibrantLightView.setBackgroundColor(vibrantLight)
-            vibrantDarkView.setBackgroundColor(vibrantDark)
-            mutedView.setBackgroundColor(muted)
-            mutedLightView.setBackgroundColor(mutedLight)
-            mutedDarkView.setBackgroundColor(mutedDark)
+
+            vibrantView.setBackgroundColor(c1)
+            vibrantView.text = String.format("#%06X", 0xFFFFFF and c1)
+
+            vibrantLightView.setBackgroundColor(c2)
+            vibrantLightView.text = String.format("#%06X", 0xFFFFFF and c2)
+
+            vibrantDarkView.setBackgroundColor(c3)
+            vibrantDarkView.text = String.format("#%06X", 0xFFFFFF and c3)
+
+            mutedView.setBackgroundColor(c4)
+            mutedView.text = String.format("#%06X", 0xFFFFFF and c4)
+
+            mutedLightView.setBackgroundColor(c5)
+            mutedLightView.text = String.format("#%06X", 0xFFFFFF and c5)
+
+            mutedDarkView.setBackgroundColor(c6)
+            mutedDarkView.text = String.format("#%06X", 0xFFFFFF and c6)
+
+            mutedView2.setBackgroundColor(c7)
+            mutedView2.text = String.format("#%06X", 0xFFFFFF and c7)
+
+            mutedLightView2.setBackgroundColor(c8)
+            mutedLightView2.text = String.format("#%06X", 0xFFFFFF and c8)
+
+            mutedDarkView2.setBackgroundColor(c9)
+            mutedDarkView2.text = String.format("#%06X", 0xFFFFFF and c9)
+
+
         }
     }
 }

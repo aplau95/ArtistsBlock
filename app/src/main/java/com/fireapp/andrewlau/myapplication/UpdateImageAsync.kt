@@ -16,18 +16,11 @@ import java.io.InputStreamReader
 import javax.net.ssl.HttpsURLConnection
 
 
-class GetImageAsyncTask(private val callback : (newImageUrl : String, newImageDesc : String, newBitmap : Bitmap) -> Unit) : AsyncTask<String, String, String>() {
+class UpdateImageAsyncTask(private val callback : (newImageUrl : String, newImageDesc : String, newBitmap : Bitmap) -> Unit) : AsyncTask<String, String, String>() {
     override fun doInBackground(vararg params: String): String {
 
         try {
-            val url = URL(params[0])
-            val urlConnection = url.openConnection() as HttpsURLConnection
-            val inString = urlConnection.inputStream.bufferedReader().readText()
-            val imageData : Array<ImageObject> = Gson().fromJson(inString, Array<ImageObject>::class.java)
-            for (imageObject in imageData) {
-                println(imageObject.urls!!.full)
-                ImageList.imageList!!.push(imageObject)
-            }
+
             try {
                 val url = URL(ImageList.imageList!!.peek().urls!!.full)
                 val connection = url.openConnection() as HttpURLConnection

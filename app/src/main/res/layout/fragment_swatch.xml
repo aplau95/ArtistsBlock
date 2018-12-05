@@ -2,109 +2,149 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:id="@+id/container"
              android:layout_width="match_parent"
+             android:layout_marginBottom="?attr/actionBarSize"
              android:layout_height="match_parent">
 
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
 
-    <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/grid_palette_example"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" android:id="@+id/NextImage"/>
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/grid_palette_example"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" android:id="@+id/NextImage"/>
 
-    <!--  Radio Group to toggle between Images  -->
+        <!--  Radio Group to toggle between Images  -->
 
-    <!--  ImageView to display selected Image  -->
-    <ImageView
-            android:id="@+id/imageDisplay"
-            android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:scaleType="fitCenter"/>
+        <!--  ImageView to display selected Image  -->
+        <ImageView
+                android:id="@+id/imageDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:scaleType="fitCenter"/>
 
-    <!--  TextView Labels to display different Palette colors background  -->
-    <TextView
-            android:id="@+id/ImageDesc"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textColor="@android:color/black"
-            android:textSize="14sp"/>
-    <TextView
-            android:id="@+id/vibrantView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="@string/vibrant"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+        <!--  TextView Labels to display different Palette colors background  -->
+        <TextView
+                android:id="@+id/ImageDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"/>
 
-    <TextView
-            android:id="@+id/vibrantLightView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="@string/vibrant_light"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+        <TableLayout android:stretchColumns="*" android:layout_width="match_parent" android:layout_height="match_parent">
+            <TableRow
+                      android:layout_weight = "1">
+                <TextView
+                        android:id="@+id/vibrantView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/vibrant"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
 
-    <TextView
-            android:id="@+id/vibrantDarkView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="@string/vibrant_dark"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+                <TextView
+                        android:id="@+id/vibrantLightView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/vibrant_light"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
 
-    <TextView
-            android:id="@+id/mutedView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="@string/muted"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+                <TextView
+                        android:id="@+id/vibrantDarkView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/vibrant_dark"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+            </TableRow>
+            <TableRow
+                      android:layout_weight = "1">
+                <TextView
+                        android:id="@+id/mutedView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/muted"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
 
-    <TextView
-            android:id="@+id/mutedLightView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="@string/muted_light"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+                <TextView
+                        android:id="@+id/mutedLightView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/muted_light"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
 
-    <TextView
-            android:id="@+id/mutedDarkView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:padding="10dp"
-            android:text="@string/muted_dark"
-            android:textColor="@android:color/white"
-            android:textSize="14sp" />
+                <TextView
+                        android:id="@+id/mutedDarkView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/muted_dark"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+            </TableRow>
+            <TableRow
+                    android:layout_weight = "1">
+                <TextView
+                        android:id="@+id/mutedView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/muted"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
 
-    <ImageView
-            android:id="@+id/expanded_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:contentDescription=""/>
+                <TextView
+                        android:id="@+id/mutedLightView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/muted_light"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
 
-</LinearLayout>
+                <TextView
+                        android:id="@+id/mutedDarkView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:text="@string/muted_dark"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
+            </TableRow>
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Click to Take Picture"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp" android:id="@+id/CameraButton"/>
+        </TableLayout>
+
+
+    </LinearLayout>
 
 </FrameLayout>
