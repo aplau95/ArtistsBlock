@@ -1,101 +1,124 @@
 package com.fireapp.andrewlau.myapplication
 
+import android.graphics.Bitmap
+import java.util.*
 
-data class Word (
-    val word : String? = "",
-    val id : String? = ""
+data class Position (
+    val latitude : Float? = null,
+    val longitude : Float? = null
 )
 
-data class Metadata (
-    val offset : Int? = null,
-    val limit : Int? = null,
-    val provider : String? = "",
-    val total : Int? = null,
-    val sourceLanguage : String? = ""
+data class Location (
+    val title : String? = "",
+    val name : String? = "",
+    val city : String? = "",
+    val country : String? = "",
+    val position : Position? = null
 )
 
-data class CompleteJson(val metadata : Metadata, val results : List<Word>) {
-    fun generateWords(): String {
-        currentWord.WORD = results[0].word!!
-        return currentWord.WORD
-    }
-    fun getSize(): Int {
-        return metadata.total!!
-    }
-}
+data class CollectionInstance (
+    val id : Int? = null,
+    val title : String? = "",
+    val published_at : String? = "",
+    val updated_at: String? = "",
+    val curated : Boolean? = null,
+    val cover_photo : String? = "",
+    val user : String? = ""
 
-data class Value (
-    val url : String? = "",
-    val height : Int? = null,
-    val width : Int? = null,
-    val thumbnail : String? = "",
-    val thumbnailHeight : Int? = null,
-    val thumbnailWidth : Int? = null,
-    val base64Encoding : String? = ""
 )
 
-data class ImageJson(val _type : String, val value : List<Value>) {
-    fun generateImageUrl(): String {
-        return value[0].url!!
-    }
-}
-
-data class DefinitionJson(val metadata : Metadata, val results : List<Results>) {
-    fun generateDefinition(): String {
-        return results!![0].lexicalEntries!![0].entries!![0].senses!![0].definitions!![0]
-    }
-}
-
-data class Example (
-    val text : String? = ""
+data class Links (
+    val self : String? = "",
+    val html : String? = "",
+    val download : String? = "",
+    val download_location : String? = ""
 )
 
-data class Sense (
-    val definitions : List<String>? = null,
-    val domains : List<String>? = null,
-    val examples : List<Example>? = null,
-    val id : String? = null,
-    val short_definitions : List<String>? = null
+data class Urls (
+    val raw : String? = "",
+    val full : String? = "",
+    val regular : String? = "",
+    val small : String? = "",
+    val thumb : String? = ""
 )
 
-data class GrammaticalFeatures (
-    val text : String? = "",
-    val type : String? = ""
-)
-
-data class VariantForm (
-    val text : String? = ""
-)
-
-data class Entry (
-    val etymologies: List<String>? = null,
-    val grammaticalFeatures: List<GrammaticalFeatures>? = null,
-    val homographNumber: Int? = null,
-    val senses: List<Sense>? = null,
-    val variantForms: List<VariantForm>? = null
-)
-
-data class LexicalEntry (
-    val entries : List<Entry>? = null,
-    val language : String? = "",
-    val lexicalCategory : String? = "",
-    val text : String? = ""
-)
-
-data class Results (
+data class ImageObject (
     val id : String? = "",
-    val language : String? = "",
-    val lexicalEntries : List<LexicalEntry>? = null,
-    val type : String? = "",
-    val word : String? = ""
+    val created_at : String? = "",
+    val updated_at : String? = "",
+    val width : Int? = null,
+    val height : Int? = null,
+    val color : String? = "",
+    val description : String? = null,
+    val urls : Urls? = null,
+    val links : Links? = null,
+    val categories : Array<String>? = null,
+    val sponsored : Boolean? = null,
+    val sponsored_by : String? = null,
+    val sponsored_impression_id : String? = null,
+    val likes: Int? = null,
+    val liked_by_user : Boolean? = null,
+    val current_user_collections : List<CollectionInstance>? = null,
+    val slug : String? = null,
+    val user : User? = null,
+    val exif : Exif? = null,
+    val location : Location? = null,
+    val views : Int? = null,
+    val downloads : Int? = null
 )
 
-object currentImage {
-    var IMAGEURL : String = ""
-    var DESCRIPTION : String = ""
+data class User (
+    val id : String? = "",
+    val updated_at: String? = "",
+    val username : String? = "",
+    val name : String? = "",
+    val first_name : String? = "",
+    val last_name : String? = "",
+    val twitter_username : String? = "",
+    val portfolio_url : String? = "",
+    val bio : String? = "",
+    val location : String? = "",
+    val links : Links2? = null,
+    val profile_image : ProfileImage? = null,
+    val instagram_username : String? = "",
+    val total_collections : Int? = null,
+    val total_likes : Int? = null,
+    val total_photos : Int? = null,
+    val accepted_tos : Boolean? = null
+)
+
+data class Links2 (
+    val self : String? = "",
+    val html : String? = "",
+    val photos : String? = "",
+    val likes : String? = "",
+    val portfolio : String? = "",
+    val following : String? = "",
+    val followers : String? = ""
+)
+
+
+data class Exif (
+    val make : String? = "",
+    val model : String? = "",
+    val exposureTime : String? = "",
+    val aperture : String? = "",
+    val focal_length : String? = "",
+    val iso : Int? = null
+)
+
+data class ProfileImage (
+    val small : String? = "",
+    val medium : String? = "",
+    val large : String? = ""
+)
+
+object ImageList {
+    var imageList : Stack<ImageObject> = Stack()
+    var currentImage : String? = null
+    var currentImageObject : ImageObject? = null
+    var currentBitMap : Bitmap? = null
 }
-
-
 
 
 

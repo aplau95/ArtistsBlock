@@ -3,6 +3,7 @@ package com.fireapp.andrewlau.myapplication
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
+import com.fireapp.andrewlau.myapplication.ImageList.imageList
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         createFragmentOne()
+        val unsplashApiLink = "https://api.unsplash.com/photos/random?client_id=bc37901814227d25f99ac03155e0e111c458e496b2d2bd6a14dab630e5568247&count=30"
+        GetImageAsyncTask().execute(unsplashApiLink)
+
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
