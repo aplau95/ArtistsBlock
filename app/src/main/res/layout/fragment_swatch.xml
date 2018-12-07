@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/container"
+             android:layout_width="match_parent"
+             android:layout_marginBottom="?attr/actionBarSize"
+             android:layout_height="match_parent">
+
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+
+        <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/grid_palette_example"
+                android:textColor="@android:color/white"
+                android:background="@android:color/holo_green_dark"
+                android:textSize="14sp" android:id="@+id/NextImage" style="@style/Widget.AppCompat.Button.Colored"/>
+
+        <ImageView
+                android:id="@+id/imageDisplay"
+                android:layout_width="match_parent"
+                android:layout_height="241dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:scaleType="fitCenter"/>
+
+        <TextView
+                android:id="@+id/ImageDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"/>
+
+        <TableLayout android:stretchColumns="*"
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:id="@+id/paletteTable">
+
+            <TableRow
+                      android:layout_weight = "1">
+                <TextView
+                        android:id="@+id/c1View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
+
+                <TextView
+                        android:id="@+id/c2View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+
+                <TextView
+                        android:id="@+id/c3View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+            </TableRow>
+            <TableRow
+                      android:layout_weight = "1">
+                <TextView
+                        android:id="@+id/c4View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
+
+                <TextView
+                        android:id="@+id/c5View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+
+                <TextView
+                        android:id="@+id/c6View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+            </TableRow>
+            <TableRow
+                    android:layout_weight = "1">
+                <TextView
+                        android:id="@+id/c7View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+
+                <TextView
+                        android:id="@+id/c8View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
+
+                <TextView
+                        android:id="@+id/c9View"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:padding="10dp"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp"/>
+            </TableRow>
+            <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Click to Take Picture"
+                    android:textColor="@android:color/white"
+                    android:background="@android:color/holo_blue_dark"
+                    android:textSize="14sp" android:id="@+id/CompleteButton"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+        </TableLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>
