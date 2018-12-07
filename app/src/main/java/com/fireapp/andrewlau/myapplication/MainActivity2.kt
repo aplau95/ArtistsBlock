@@ -18,7 +18,7 @@ import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_swatch.*
 
 
-class MainActivity : AppCompatActivity(){
+class MainActivity2 : AppCompatActivity(){
     val unsplashApiLink = "https://api.unsplash.com/photos/random?client_id=bc37901814227d25f99ac03155e0e111c458e496b2d2bd6a14dab630e5568247&count=30&orientation=landscape&featured"
     val manager = supportFragmentManager
 
