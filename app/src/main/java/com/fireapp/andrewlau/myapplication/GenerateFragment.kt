@@ -1,6 +1,8 @@
 package com.fireapp.andrewlau.myapplication
 
 
+import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -8,10 +10,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.graphics.*
+import android.net.Uri
 import android.support.v7.graphics.Palette
+import android.view.animation.RotateAnimation
 import android.widget.ImageView
+import android.widget.LinearLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_swatch.*
+
+
+//import edu.calpoly.rscovil.dialogfragments.OpenFinishFrag
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -20,12 +28,8 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 
-class GenerateFragment : Fragment() {
-    private val CAMERA_PIC_REQUEST = 1337
-    val unsplashApiLink = "https://api.unsplash.com/photos/random?client_id=bc37901814227d25f99ac03155e0e111c458e496b2d2bd6a14dab630e5568247&count=30"
-//    var currentImageUrl : String? = ""
-//    var currentImageBitmap : Bitmap? = null
-//    var currentImageDesc : String? = ""
+class GenerateFragment : Fragment(){
+    val unsplashApiLink = "https://api.unsplash.com/photos/random?client_id=bc37901814227d25f99ac03155e0e111c458e496b2d2bd6a14dab630e5568247&count=30&orientation=landscape&featured"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +44,20 @@ class GenerateFragment : Fragment() {
         val imageDisplay = getView()!!.findViewById(R.id.imageDisplay) as ImageView
         GetImageAsyncTask(::updateInfo).execute(unsplashApiLink)
 
+
+//        val currentOrientation = resources.configuration.orientation
+//        if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            println("LANDSCAPE")
+//        } else {
+//            // Portrait
+//        }
+
+        val completeButton = getView()!!.findViewById(R.id.CompleteButton) as Button
+        completeButton.setOnClickListener {
+            openFinishFragment()
+
+        }
+
         getImage.setOnClickListener() {
             if (ImageList.imageList.size < 3){
                 GetImageAsyncTask(::updateInfo).execute(unsplashApiLink)
@@ -48,30 +66,36 @@ class GenerateFragment : Fragment() {
             }
         }
 
-        imageDisplay.setOnClickListener(){
+        imageDisplay.setOnClickListener() {
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(ImageList.currentImage))
+            startActivity(browserIntent)
+        }
+
+        var isImageFitToScreen = false
+//        imageDisplay.setOnClickListener(){
 //            if (isImageFitToScreen) {
 //                isImageFitToScreen = false
-//                imageDisplay.setLayoutParams(
-//                    LinearLayout.LayoutParams(
-//                        LinearLayout.LayoutParams.WRAP_CONTENT,
-//                        LinearLayout.LayoutParams.WRAP_CONTENT
-//                    )
-//                )
-//                imageDisplay.setAdjustViewBounds(true)
+//                imageDisplay.layoutParams =
+//                        LinearLayout.LayoutParams(
+//                            LinearLayout.LayoutParams.WRAP_CONTENT,
+//                            LinearLayout.LayoutParams.WRAP_CONTENT
+//
+//                        )
+//                imageDisplay.adjustViewBounds = true
 //            } else {
 //                isImageFitToScreen = true
-//                imageDisplay.setLayoutParams(
-//                    LinearLayout.LayoutParams(
-//                        LinearLayout.LayoutParams.MATCH_PARENT,
-//                        LinearLayout.LayoutParams.MATCH_PARENT
-//                    )
-//                )
-//                imageDisplay.setScaleType(ImageView.ScaleType.FIT_XY)
+//                imageDisplay.layoutParams =
+//                        LinearLayout.LayoutParams(
+//                            LinearLayout.LayoutParams.MATCH_PARENT,
+//                            LinearLayout.LayoutParams.MATCH_PARENT
+//                        )
+//                imageDisplay.scaleType = ImageView.ScaleType.FIT_XY
 //            }
-        }
+//        }
 
 
     }
+
 
     private fun initializeDescText(imageDesc : String){
         ImageDesc.text = imageDesc
@@ -81,7 +105,7 @@ class GenerateFragment : Fragment() {
     private fun updateInfo(imageUrl : String, imageDesc : String, imageBitmap : Bitmap) {
         Picasso.get()
             .load(imageUrl)
-            .fit()
+            .resize(0, imageDisplay.height)
             .into(imageDisplay)
         initializeDescText(imageDesc)
         createPalette(imageBitmap)
@@ -132,5 +156,10 @@ class GenerateFragment : Fragment() {
 
 
         }
+    }
+
+    private fun openFinishFragment() {
+        val dialog = OpenFinishFrag()
+        dialog.show(fragmentManager, "NoticeDialogFragment")
     }
 }

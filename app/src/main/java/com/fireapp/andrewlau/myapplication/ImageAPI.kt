@@ -62,6 +62,7 @@ class GetImageAsyncTask(private val callback : (newImageUrl : String, newImageDe
     override fun onPostExecute(result: String?) {
 
         val io = ImageList.imageList!!.pop()
+        ImageList.currentImage = io.urls!!.full!!
         var imageDesc = "no description available"
         if (!io.description.isNullOrEmpty()) {
             imageDesc = io.description
