@@ -67,6 +67,7 @@ class GetImageAsyncTask(private val callback : (newImageUrl : String, newImageDe
         if (!io.description.isNullOrEmpty()) {
             imageDesc = io.description
         }
+        ImageList.currentImageDesc = imageDesc
         callback(io.urls!!.full!!, imageDesc, ImageList.currentBitMap!!)
     }
 

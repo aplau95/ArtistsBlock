@@ -5,21 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ItemListActivity">
+    tools:context=".ItemListFragment">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-             />
-
-    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -27,21 +14,10 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <include layout="@layout/item_list" />
 
+        <include layout="@layout/item_list" />
     </FrameLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnShowDialog"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:clickable="true"
-        app:layout_anchor="@+id/frameLayout"
-        android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        app:layout_anchorGravity="bottom|right|end"
-        app:srcCompat="@android:drawable/ic_input_add"
-        android:focusable="true" />
 
 
 </android.support.design.widget.CoordinatorLayout>

@@ -116,6 +116,7 @@ data class ProfileImage (
 object ImageList {
     var imageList : Stack<ImageObject> = Stack()
     var currentImage : String? = null
+    var currentImageDesc : String? = null
     var currentImageObject : ImageObject? = null
     var currentBitMap : Bitmap? = null
 }
